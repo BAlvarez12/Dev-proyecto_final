@@ -44,13 +44,21 @@ public class sr_empleado extends HttpServlet {
         if (gparametro != null && !gparametro.isEmpty()) {
             genero = Integer.parseInt(gparametro);
         }
-            
+      
+        String btnAgregar = request.getParameter("btn_agregar");
+        String btnModificar = request.getParameter("btn_modificar");
+        int valor = 0;
+        if ("agregar".equals(btnAgregar)) {
+            valor = 1; 
+        } else if ("modificar".equals(btnModificar)) {
+            valor = 1; 
+        }
             empleado = new Empleado(Integer.parseInt(request.getParameter("txt_id")),
                     Integer.parseInt(request.getParameter("drop_puesto")),
                     request.getParameter("txt_nombres"),request.getParameter("txt_apellidos"),
                     request.getParameter("txt_direccion"),request.getParameter("txt_telefono"),
-                    genero,request.getParameter("txt_dpi"),request.getParameter("txt_fn"),
-                    request.getParameter("txt_fe_inicio"),request.getParameter("txt_fe_ingreso"));
+                    genero,request.getParameter("txt_dpi"),valor,request.getParameter("txt_fn"),
+                    request.getParameter("txt_fe_inicio"),new java.sql.Timestamp(System.currentTimeMillis()));
 
              if ("agregar".equals(request.getParameter("btn_agregar"))) {
                 if (empleado.agregar() > 0) {
@@ -70,7 +78,7 @@ public class sr_empleado extends HttpServlet {
                 response.sendRedirect("index.jsp");
             }
              
-             if ("eliminar".equals(request.getParameter("btn_eliminar"))) {
+             if ("anular".equals(request.getParameter("btn_anular"))) {
                 if (empleado.eliminar() > 0) {
                     request.getSession().setAttribute("mensaje", "Empleado eliminado con éxito.");
                 } else {

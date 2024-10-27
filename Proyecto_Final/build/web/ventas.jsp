@@ -38,6 +38,12 @@
         .btn-custom {
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
         }
+        .alert-stock {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1055;
+        }
     </style>
 </head>
 <body>
@@ -77,31 +83,27 @@
                                 <div class="col-md-6 mb-4">
                                     <label for="drop_cliente" class="form-label">Cliente:</label>
                                     <select name="drop_cliente" id="drop_cliente" class="form-select">
-                                        <%
-                                      Cliente cliente = new Cliente();
-                                      HashMap<String,String> drop = cliente.drop_clientes();
-                                      for(String i: drop.keySet()){
-                                        out.println("<option value='" + i + "'>" + drop.get(i) + "</option>");
-                                      }
-                                   %>
+                                        <% Cliente cliente = new Cliente();
+                                           HashMap<String,String> drop = cliente.drop_clientes();
+                                           for(String i: drop.keySet()){
+                                               out.println("<option value='" + i + "'>" + drop.get(i) + "</option>");
+                                           } %>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="drop_empleado" class="form-label">Empleado:</label>
                                     <select name="drop_empleado" id="drop_empleado" class="form-select">
-                                       <%
-                                      Empleado empleadoDrop = new Empleado();
-                                      HashMap<String,String> dropE = empleadoDrop.drop_empleados();
-                                      for(String i: dropE.keySet()){
-                                        out.println("<option value='" + i + "'>" + dropE.get(i) + "</option>");
-                                      }
-                                   %>
+                                        <% Empleado empleadoDrop = new Empleado();
+                                           HashMap<String,String> dropE = empleadoDrop.drop_empleados();
+                                           for(String i: dropE.keySet()){
+                                               out.println("<option value='" + i + "'>" + dropE.get(i) + "</option>");
+                                           } %>
                                     </select>
                                 </div>
-                             <div class="mb-4">
-                             <label for="txt_fecha_ingreso" class="form-label">Fecha Ingreso:</label>
-                             <input type="DATETIME" name="txt_fecha_ingreso" id="txt_fecha_ingreso" class="form-control"  readonly>
-                            </div>
+                                <div class="mb-4">
+                                    <label for="txt_fecha_ingreso" class="form-label">Fecha Ingreso:</label>
+                                    <input type="DATETIME" name="txt_fecha_ingreso" id="txt_fecha_ingreso" class="form-control" readonly>
+                                </div>
                             </div>
                             <hr class="my-4">
                             <h4 class="mb-4">Detalles de Producto</h4>
@@ -109,13 +111,11 @@
                                 <div class="col-md-4 mb-4">
                                     <label for="drop_producto" class="form-label">Producto:</label>
                                     <select name="drop_producto" id="drop_producto" class="form-select">
-                                        <%
-                                      Productos productos = new Productos();
-                                      HashMap<String,String> dropP = productos.drop_productos();
-                                      for(String i: dropP.keySet()){
-                                        out.println("<option value='" + i + "'>" + dropP.get(i) + "</option>");
-                                      }
-                                   %>
+                                        <% Productos productos = new Productos();
+                                           HashMap<String,String> dropP = productos.drop_productos();
+                                           for(String i: dropP.keySet()){
+                                               out.println("<option value='" + i + "'>" + dropP.get(i) + "</option>");
+                                           } %>
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-4">
@@ -129,28 +129,11 @@
                             </div>
                             <div class="modal-footer mt-4">
                                 <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">Cancelar</button>
-                                <button name="btn_agregar" id="btn_agregar" value="agregar" class="btn btn-primary btn-custom">Guardar</button>
+                                <button type="submit" name="btn_agregar" id="btn_agregar" value="agregar" class="btn btn-primary btn-custom">Guardar</button>
+                                <button type="submit" name="btn_modificar" id="btn_modificar" value="modificar" class="btn btn-success btn-custom">Modificar</button>
+                                <button type="button" class="btn btn-danger" id="btn_anular" data-bs-toggle="modal" data-bs-target="#modalConfirmacion" style="display: none;">Anular Venta</button>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Confirmar eliminacion -->
-        <div class="modal fade" id="modalConfirmacion" tabindex="-1" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalConfirmacionLabel">Confirmar Eliminación</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ¿Está seguro de que desea eliminar esta venta?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger btn-custom" id="btnConfirmarEliminar">Eliminar</button>
                     </div>
                 </div>
             </div>
@@ -175,15 +158,15 @@
                     DefaultTableModel tabla = new DefaultTableModel();
                     tabla = ventas.leer();
                     for(int t = 0; t < tabla.getRowCount(); t++){
-                        out.println("<tr data-id_venta=" + tabla.getValueAt(t, 0) + " data-fecha_ingreso=" + tabla.getValueAt(t, 8) + " data-id_cliente=" + tabla.getValueAt(t, 4) + " data-id_empleados=" + tabla.getValueAt(t, 6) + " data-id_producto=" + tabla.getValueAt(t, 9) +">");
-                        out.println("<td>" + tabla.getValueAt(t, 1) + "</td>"); //No factura
-                        out.println("<td>" + tabla.getValueAt(t, 2) + "</td>"); //SERIE
-                        out.println("<td>" + tabla.getValueAt(t, 3) + "</td>"); //Fecha_factura
-                        out.println("<td>" + tabla.getValueAt(t, 5) + "</td>"); //Cliente
-                        out.println("<td>" + tabla.getValueAt(t, 7) + "</td>"); //Empleado
-                        out.println("<td>" + tabla.getValueAt(t, 10) + "</td>"); //Producto
-                        out.println("<td>" + tabla.getValueAt(t, 11) + "</td>"); //Cantidad
-                        out.println("<td>" + tabla.getValueAt(t, 12) + "</td>"); //Precio Unitario
+                        out.println("<tr data-id_venta=" + tabla.getValueAt(t, 0) + " data-estado=" + tabla.getValueAt(t, 4) +  " data-fecha_ingreso=" + tabla.getValueAt(t, 9) + " data-id_cliente=" + tabla.getValueAt(t, 5) + " data-id_empleados=" + tabla.getValueAt(t, 7) + " data-id_producto=" + tabla.getValueAt(t, 10) +">");
+                        out.println("<td>" + tabla.getValueAt(t, 1) + "</td>"); // No factura
+                        out.println("<td>" + tabla.getValueAt(t, 2) + "</td>"); // Serie
+                        out.println("<td>" + tabla.getValueAt(t, 3) + "</td>"); // Fecha factura
+                        out.println("<td>" + tabla.getValueAt(t, 6) + "</td>"); // Cliente
+                        out.println("<td>" + tabla.getValueAt(t, 8) + "</td>"); // Empleado
+                        out.println("<td>" + tabla.getValueAt(t, 11) + "</td>"); // Producto
+                        out.println("<td>" + tabla.getValueAt(t, 12) + "</td>"); // Cantidad
+                        out.println("<td>" + tabla.getValueAt(t, 13) + "</td>"); // Precio Unitario
                         out.println("</tr>");
                     }
                 %>
@@ -191,38 +174,94 @@
         </table>
     </div>
 
+    <!-- Confirmar anulación -->
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalConfirmacionLabel">Confirmar Anulación de Venta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro de que desea anular esta venta?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btnConfirmarAnular">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmar falta de stock -->
+    <div class="modal fade" id="modalStock" tabindex="-1" aria-labelledby="modalStockLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalStockLabel">Stock Insuficiente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    No hay suficiente stock disponible para completar la venta.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script type="text/javascript">
-        function limpiar() {
-            $("#txt_id").val(0);
-            $("#txt_no_factura").val('');
-            $("#txt_serie").val('');
-            $("#txt_fecha_factura").val('');
-            $("#drop_cliente").val(1);
-            $("#drop_empleado").val(1);
-            $("#drop_producto").val(1);
-            $("#txt_cantidad").val('');
-            $("#txt_precio_unitario").val('');
-        }
-
         $(document).ready(function() {
-            // Cuando el usuario haga clic en el botón de confirmar eliminación
-            document.getElementById("btnConfirmarEliminar").addEventListener("click", function() {
+            // Confirmar la anulación
+            $("#btnConfirmarAnular").on("click", function() {
                 var form = document.getElementById("form_venta");
-                var inputEliminar = document.createElement("input");
-                inputEliminar.setAttribute("type", "hidden");
-                inputEliminar.setAttribute("name", "btn_eliminar");
-                inputEliminar.setAttribute("value", "eliminar");
-                form.appendChild(inputEliminar);
+                var inputAnular = document.createElement("input");
+                inputAnular.setAttribute("type", "hidden");
+                inputAnular.setAttribute("name", "btn_anular");
+                inputAnular.setAttribute("value", "anular");
+                form.appendChild(inputAnular);
                 form.submit();
                 var modalEl = document.getElementById('modalConfirmacion');
                 var modal = bootstrap.Modal.getInstance(modalEl);
                 modal.hide();
             });
 
-            // Cuando se haga clic en una fila de la tabla
+            // Validación de stock antes de enviar el formulario
+            $("#form_venta").off('submit').on('submit', function(e) {
+                e.preventDefault();
+                let id_producto = $("#drop_producto").val();
+                let cantidad = $("#txt_cantidad").val();
+
+                $.ajax({
+                    url: "checkStock",
+                    type: "GET",
+                    data: {
+                        id_producto: id_producto,
+                        cantidad: cantidad
+                    },
+                    success: function(response) {
+                        if (response.status === "OK") {
+                            $("#form_venta").off('submit').submit();
+                        } else {
+                            var modalStock = new bootstrap.Modal(document.getElementById('modalStock'));
+                            modalStock.show();
+                        }
+                    },
+                    error: function() {
+                        let alertHtml = `<div class="alert alert-danger alert-dismissible fade show alert-stock" role="alert">
+                                            <strong>Error:</strong> No se pudo verificar el stock del producto.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>`;
+                        $("body").append(alertHtml);
+                    }
+                });
+            });
+
+            // Cargar datos al modal al hacer clic en una fila de la tabla
             $('#tbl_venta').on('click', 'tr', function() {
                 var target = $(this);
                 var id_venta = target.data('id_venta');
@@ -235,7 +274,7 @@
                 var fecha_factura = target.find("td").eq(2).html();
                 var cantidad = target.find("td").eq(6).html();
                 var precio_unitario = target.find("td").eq(7).html();
-               
+
                 $("#txt_id").val(id_venta);
                 $("#txt_no_factura").val(no_factura);
                 $("#txt_serie").val(serie);
@@ -246,6 +285,7 @@
                 $("#txt_cantidad").val(cantidad);
                 $("#txt_precio_unitario").val(precio_unitario);
                 $("#txt_fecha_ingreso").val(fecha_ingreso);
+                $("#btn_anular").show();
                 $("#modal_venta").modal('show');
             });
         });

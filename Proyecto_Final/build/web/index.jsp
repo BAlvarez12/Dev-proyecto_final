@@ -134,6 +134,7 @@
         </button>
         <h3>Sains Mall</h3>
         <a href="javascript:void(0);" id="ventas-link"><i class="material-icons">storefront</i> <span class="link-text">Ventas</span></a>
+        <a href="javascript:void(0);" id="compras-link"><i class="material-icons">shopping_cart_checkout</i> <span class="link-text">Compras</span></a>
         <a href="javascript:void(0);" id="clientes-link"><i class="material-icons">person_pin</i> <span class="link-text">Clientes</span></a>
         <a href="javascript:void(0);" id="proveedores-link"><i class="material-icons">group</i> <span class="link-text">Proveedores</span></a>
         <a href="javascript:void(0);" id="productos-link"><i class="material-icons">local_shipping</i> <span class="link-text">Productos</span></a>
@@ -210,6 +211,10 @@
             
             $('#ventas-link').click(function(){
                 $('#contenido-dinamico').load('ventas.jsp');
+            });
+            
+               $('#compras-link').click(function(){
+                $('#contenido-dinamico').load('compras.jsp');
             });
 
             // oculta o muestra el sidebar
