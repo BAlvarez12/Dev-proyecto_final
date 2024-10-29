@@ -21,6 +21,14 @@
         <servlet-name>sr_ventas</servlet-name>
         <servlet-class>controlador.sr_ventas</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sr_compras</servlet-name>
+        <servlet-class>controlador.sr_compras</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Stock</servlet-name>
+        <servlet-class>controlador.Stock</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>sr_empleado</servlet-name>
         <url-pattern>/sr_empleado</url-pattern>
@@ -102,4 +110,20 @@
         <servlet-name>sr_ventas</servlet-name>
         <url-pattern>/sr_ventas</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_compras</servlet-name>
+        <url-pattern>/sr_compras</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Stock</servlet-name>
+        <url-pattern>/Stock</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error500.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/errorGeneral.jsp</location>
+    </error-page>
 </web-app>

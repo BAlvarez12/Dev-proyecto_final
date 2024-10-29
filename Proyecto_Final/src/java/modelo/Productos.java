@@ -126,7 +126,48 @@ public class Productos {
     }
     return drop;
     }
+     
+     // Método para actualizar la existencia del producto después de una venta
+public int actualizarExistencia(int id_producto, int cantidadVendida) {
+    int retorno = 0;
+    try {
+        PreparedStatement parametro;
+        cn = new Conexion();
+        String query = "UPDATE productos SET existencia = existencia - ? WHERE id_producto = ? AND existencia >= ?;";
+        cn.abrir_conexion();
+        parametro = cn.conexionDB.prepareStatement(query);
+        parametro.setInt(1, cantidadVendida);
+        parametro.setInt(2, id_producto);
+        parametro.setInt(3, cantidadVendida);
+        retorno = parametro.executeUpdate();
+        cn.cerrar_conexion();
+    } catch (SQLException ex) {
+        System.out.println("Error al actualizar la existencia del producto: " + ex.getMessage());
+        retorno = 0;
+    }
+    return retorno;
+}
+
     
+    public int Existencia(int id_producto) {
+    int existencia = 0;
+    try {
+        cn = new Conexion();
+        cn.abrir_conexion();
+        String query = "SELECT existencia FROM productos WHERE id_producto = ?;";
+        PreparedStatement parametro = cn.conexionDB.prepareStatement(query);
+        parametro.setInt(1, id_producto);
+        ResultSet consulta = parametro.executeQuery();
+        if (consulta.next()) {
+            existencia = consulta.getInt("existencia");
+        }
+        cn.cerrar_conexion();
+    } catch (SQLException ex) {
+        System.out.println("Error al obtener la existencia del producto: " + ex.getMessage());
+    }
+    return existencia;
+}
+
     
     // Metodo leer productos
     public DefaultTableModel leer(){

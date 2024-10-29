@@ -108,15 +108,11 @@
                                 <label for="txt_fe_inicio" class="form-label">Fecha de Inicio de Labores:</label>
                                 <input type="date" name="txt_fe_inicio" id="txt_fe_inicio" class="form-control" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="txt_fe_ingreso" class="form-label">Fecha de Ingreso:</label>
-                                <input type="date" name="txt_fe_ingreso" id="txt_fe_ingreso" class="form-control" required>
-                            </div>
                             <div class="modal-footer mt-4">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                 <button name="btn_agregar" id="btn_agregar" value="agregar" class="btn btn-primary">Guardar</button>
                                 <button name="btn_modificar" id="btn_modificar" value="modificar" class="btn btn-success">Modificar</button>
-                                <button type="button" class="btn btn-danger" id="btn_eliminar" data-bs-toggle="modal" data-bs-target="#modalConfirmacion">Eliminar</button>
+                                <button type="button" class="btn btn-danger" id="btn_anular" data-bs-toggle="modal" data-bs-target="#modalConfirmacion" style="display: none;">Fin de labores</button>
                             </div>
                         </form>
                     </div>
@@ -145,17 +141,17 @@
                     DefaultTableModel tabla = new DefaultTableModel();
                     tabla = empleado.leer();
                     for(int t = 0; t < tabla.getRowCount(); t++){
-                        out.println("<tr data-id_empleados=" + tabla.getValueAt(t, 0) + " data-id_puesto=" + tabla.getValueAt(t, 9) +">");
+                        out.println("<tr data-id_empleados=" + tabla.getValueAt(t, 0) + " data-id_puesto=" + tabla.getValueAt(t, 10) + " data-estado=" + tabla.getValueAt(t, 6) +">");
                         out.println("<td>" + tabla.getValueAt(t, 1) + "</td>"); //Nombres
                         out.println("<td>" + tabla.getValueAt(t, 2) + "</td>"); //Apellidos
                         out.println("<td>" + tabla.getValueAt(t, 3) + "</td>"); //Direccion
                         out.println("<td>" + tabla.getValueAt(t, 4) + "</td>"); //Telefono
                         out.println("<td>" + tabla.getValueAt(t, 5) + "</td>"); //DPI
-                        out.println("<td>" + tabla.getValueAt(t, 6) + "</td>"); //GENERO
-                        out.println("<td>" + tabla.getValueAt(t, 7) + "</td>"); //fecha nacimiento
-                        out.println("<td>" + tabla.getValueAt(t, 8) + "</td>"); //puesto
-                        out.println("<td>" + tabla.getValueAt(t, 10) + "</td>");//fecha inicio labores
-                        out.println("<td>" + tabla.getValueAt(t, 11) + "</td>");//fecha ingreso
+                        out.println("<td>" + tabla.getValueAt(t, 7) + "</td>"); //GENERO
+                        out.println("<td>" + tabla.getValueAt(t, 8) + "</td>"); //fecha nacimiento
+                        out.println("<td>" + tabla.getValueAt(t, 9) + "</td>"); //puesto
+                        out.println("<td>" + tabla.getValueAt(t, 11) + "</td>");//fecha inicio labores
+                        out.println("<td>" + tabla.getValueAt(t, 12) + "</td>");//fecha ingreso
                         out.println("</tr>");
                     }
                 %>
@@ -168,15 +164,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalConfirmacionLabel">Confirmar Eliminar</h5>
+                    <h5 class="modal-title" id="modalConfirmacionLabel">Confirmar Baja de Empleado</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ¿Está seguro de que desea eliminar este empleado?
+                    ¿Está seguro de que desea dar de baja al empleado?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Eliminar</button>
+                    <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Aceptar</button>
                 </div>
             </div>
         </div>
@@ -198,16 +194,16 @@
             $("#drop_puesto").val(1);
             $("#txt_fe_inicio").val('');
             $("#txt_fe_ingreso").val('');
+            $("#btn_eliminar").hide();
         }
 
         $(document).ready(function() {
-            // Clic en el botón eliminar
             document.getElementById("btnConfirmarEliminar").addEventListener("click", function() {
                 var form = document.getElementById("form_empleado");
                 var inputEliminar = document.createElement("input");
                 inputEliminar.setAttribute("type", "hidden");
-                inputEliminar.setAttribute("name", "btn_eliminar");
-                inputEliminar.setAttribute("value", "eliminar");
+                inputEliminar.setAttribute("name", "btn_anular");
+                inputEliminar.setAttribute("value", "anular");
                 form.appendChild(inputEliminar);
                 form.submit();
                 var modalEl = document.getElementById('modalConfirmacion');
@@ -236,10 +232,11 @@
                 $("#txt_telefono").val(telefono);
                 $("#txt_dpi").val(dpi);
                 $("#txt_genero").val(genero === "Masculino" ? 1 : 0);
-                $("#txt_fn").val(nacimiento);
                 $("#drop_puesto").val(id_puesto);
+                $("#txt_fn").val(nacimiento);
                 $("#txt_fe_inicio").val(fecha_inicio);
                 $("#txt_fe_ingreso").val(fecha_ingreso);
+                $("#btn_anular").show();
                 $("#modal_empleado").modal('show');
             });
         });
