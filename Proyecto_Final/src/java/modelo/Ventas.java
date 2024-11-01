@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,10 +6,6 @@ import java.sql.Timestamp;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Statement;
 
-/**
- *
- * @author Bomiki
- */
 public class Ventas {
     private String fecha_factura;
     private int no_factura, serie, id_cliente, id_empleado, id_venta, id_producto, cantidad, estado;
@@ -24,7 +16,7 @@ public class Ventas {
     public Ventas (){
     }
 
-    public Ventas(int id_venta, int estado, int no_factura, int serie, String fecha_factura,int id_cliente,int id_empleado, Timestamp fecha_ingreso, int id_producto,int cantidad, double precio_unitario ) {
+    public Ventas(int id_venta, int estado, int no_factura, int serie, String fecha_factura,int id_cliente,int id_empleado, Timestamp fecha_ingreso) {
         this.no_factura = no_factura;
         this.serie = serie;
         this.fecha_factura = fecha_factura;
@@ -32,9 +24,6 @@ public class Ventas {
         this.id_empleado = id_empleado;
         this.fecha_ingreso = fecha_ingreso;
         this.id_venta = id_venta;
-        this.id_producto = id_producto;
-        this.cantidad = cantidad;
-        this.precio_unitario = precio_unitario;
         this.estado = estado;
     }
 
@@ -186,25 +175,37 @@ public class Ventas {
 
             // Obtener el id generado para la venta
             ResultSet generatedKeys = parametro.getGeneratedKeys();
-            int idVentaGenerado = 0;
             if (generatedKeys.next()) {
-                idVentaGenerado = generatedKeys.getInt(1);
-            }
-
-            // Insertar detalle de venta usando el id generado
-            if (idVentaGenerado > 0) {
-                query = "INSERT INTO ventas_detalle (id_venta, id_producto, cantidad, precio_unitario) VALUES (?, ?, ?, ?);";
-                parametro = cn.conexionDB.prepareStatement(query);
-                parametro.setInt(1, idVentaGenerado); // Usar el id generado
-                parametro.setInt(2, getId_producto());
-                parametro.setInt(3, getCantidad());
-                parametro.setDouble(4, getPrecio_unitario());
-                retorno += parametro.executeUpdate();
+                this.id_venta = generatedKeys.getInt(1);
             }
 
             cn.cerrar_conexion();
         } catch (SQLException ex) {
             System.out.println("Error al insertar la venta: " + ex.getMessage());
+            retorno = 0;
+        }
+        return retorno;
+    }
+
+    // Método para agregar detalles de venta
+    public int agregarDetalle(int idProducto, int cantidad, double precioUnitario) {
+        int retorno = 0;
+        try {
+            PreparedStatement parametro;
+            cn = new Conexion();
+            String query = "INSERT INTO ventas_detalle (id_venta, id_producto, cantidad, precio_unitario) VALUES (?, ?, ?, ?);";
+            cn.abrir_conexion();
+
+            parametro = cn.conexionDB.prepareStatement(query);
+            parametro.setInt(1, this.id_venta);
+            parametro.setInt(2, idProducto);
+            parametro.setInt(3, cantidad);
+            parametro.setDouble(4, precioUnitario);
+            retorno = parametro.executeUpdate();
+
+            cn.cerrar_conexion();
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar el detalle de la venta: " + ex.getMessage());
             retorno = 0;
         }
         return retorno;
@@ -228,4 +229,4 @@ public class Ventas {
         }
         return retorno;
     }
-} 
+}

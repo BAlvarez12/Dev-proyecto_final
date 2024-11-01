@@ -109,7 +109,6 @@
                             <div class="modal-footer mt-4">
                                 <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">Cancelar</button>
                                 <button type="submit" name="btn_agregar" id="btn_agregar" value="agregar" class="btn btn-primary btn-custom">Guardar</button>
-                                <button name="btn_modificar" id="btn_modificar" value="modificar" class="btn btn-success">Modificar</button>
                                 <button type="button" class="btn btn-danger" id="btn_anular" data-bs-toggle="modal" data-bs-target="#modalConfirmacion" style="display: none;">Anular Compra</button>
                             </div>
                         </form>

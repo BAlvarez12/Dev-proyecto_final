@@ -4,13 +4,20 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/src/java/modelo/Ventas.java</file>
-            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/src/java/controlador/sr_ventas.java</file>
-            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/src/java/modelo/Compras.java</file>
-            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/src/java/controlador/Stock.java</file>
-            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/src/java/controlador/sr_compras.java</file>
-            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/src/java/modelo/Productos.java</file>
-            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/compras.jsp</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/proveedores.jsp</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/empleados.jsp</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/home.jsp</file>
             <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/ventas.jsp</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/roles.jsp</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/src/java/modelo/MenuDAO.java</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/index.jsp</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/marcas.jsp</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/productos.jsp</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/src/java/controlador/sr_ventas.java</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/src/java/controlador/Stock.java</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/clientes.jsp</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/compras.jsp</file>
+            <file>file:/C:/Users/Bomiki/Documents/NetBeansProjects/Proyecto_Final/web/Puestos.jsp</file>
         </group>
     </open-files>
 </project-private>
