@@ -1,0 +1,94 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Proveedores" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53085bd8-ee33-4d5c-b2b9-0c213446a248">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="ZGJfcHJveWVjdG9maW5hbC5wcm92ZWVkb3JlcyBBUyAsNDYsNTMsNjBhMzUyZDgtZDY2Mi00Y2Jl&#xa;LWI2ZDQtNzBhMGJmZDM5OWQ1Ow=="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<query language="SQL"><![CDATA[SELECT `idProveedor`,
+	proveedor,
+	nit,
+	direccion,
+	telefono
+FROM db_proyectofinal.proveedores]]></query>
+	<field name="idProveedor" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="idProveedor"/>
+		<property name="com.jaspersoft.studio.field.label" value="idProveedor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="proveedores"/>
+	</field>
+	<field name="proveedor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="proveedor"/>
+		<property name="com.jaspersoft.studio.field.label" value="proveedor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="proveedores"/>
+	</field>
+	<field name="nit" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nit"/>
+		<property name="com.jaspersoft.studio.field.label" value="nit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="proveedores"/>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.label" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="proveedores"/>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.label" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="proveedores"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="image" uuid="970e6f7e-4cfb-4da3-b230-b91b039e2556" x="86" y="10" width="60" height="41">
+			<expression><![CDATA["Proveedores.jpg"]]></expression>
+		</element>
+		<element kind="rectangle" uuid="7292353e-697e-4dca-b9b2-7858f82c9201" x="152" y="10" width="271" height="41" backcolor="#0E0D21"/>
+		<element kind="staticText" uuid="a3d24163-7ccc-4f31-b37e-7344f0598c03" x="152" y="10" width="271" height="41" forecolor="#FAF0F0" fontName="Comic Sans MS" fontSize="27.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Proveedores
+]]></text>
+		</element>
+	</title>
+	<pageHeader height="1" splitType="Stretch"/>
+	<columnHeader height="20" splitType="Stretch">
+		<element kind="staticText" uuid="6638a89c-23f5-4217-be58-724870524129" x="45" y="-1" width="100" height="21" fontName="Arial Black">
+			<text><![CDATA[Nombre de Proveedor]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="77fe3b7a-7c6d-4023-8d83-8e8a0eb52362"/>
+		</element>
+		<element kind="staticText" uuid="a53937f1-7bad-42b5-bc00-e4e22b4f5eec" x="155" y="-1" width="50" height="21" fontName="Arial Black">
+			<text><![CDATA[Nit]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0e9bfa34-5713-4991-bd2f-65e6512f433b"/>
+		</element>
+		<element kind="staticText" uuid="a86c8566-26df-4855-87fd-7008e6187615" x="215" y="0" width="120" height="20" fontName="Arial Black">
+			<text><![CDATA[Direccion]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="884400ee-984b-4f8f-8911-4ee7850c75ba"/>
+		</element>
+		<element kind="staticText" uuid="e26685a5-3793-4b63-9d0b-9094759de7c2" x="345" y="0" width="70" height="20" fontName="Arial Black">
+			<text><![CDATA[Telefono]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="21e0e832-5e6e-4f47-9d10-3412e312ff85"/>
+		</element>
+		<element kind="line" uuid="c2fbf036-7b9a-4b48-8fe5-4fd32e48df96" x="40" y="14" width="360" height="1"/>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<element kind="textField" uuid="a09bcbdf-ea16-4f34-af0a-2c3990c79cc9" x="45" y="0" width="100" height="20">
+				<expression><![CDATA[$F{proveedor}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="77fe3b7a-7c6d-4023-8d83-8e8a0eb52362"/>
+			</element>
+			<element kind="textField" uuid="ae2dfd4d-3a6e-4f14-84a4-7b5cb6433d74" x="155" y="0" width="50" height="20">
+				<expression><![CDATA[$F{nit}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0e9bfa34-5713-4991-bd2f-65e6512f433b"/>
+			</element>
+			<element kind="textField" uuid="7654e740-efaf-406c-9d12-fbcabb79aaa0" x="215" y="0" width="120" height="20">
+				<expression><![CDATA[$F{direccion}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="884400ee-984b-4f8f-8911-4ee7850c75ba"/>
+			</element>
+			<element kind="textField" uuid="b9788f69-4976-461e-9375-52f28fc72e4c" x="345" y="0" width="70" height="20">
+				<expression><![CDATA[$F{telefono}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="21e0e832-5e6e-4f47-9d10-3412e312ff85"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch">
+		<element kind="textField" uuid="166913e9-ca44-4cd8-ab36-cd13544757d7" x="280" y="23" width="31" height="21">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+		</element>
+	</pageFooter>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>
