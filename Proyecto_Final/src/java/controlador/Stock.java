@@ -29,10 +29,26 @@ public class Stock extends HttpServlet {
                 int cantidad = Integer.parseInt(cantidadStr);
                 Productos producto = new Productos();
                 int existencia = producto.Existencia(id_producto);
-                if (existencia >= cantidad) {
-                    out.print("{\"status\": \"OK\", \"message\": \"Stock suficiente.\"}");
-                } else {
+                if (existencia < cantidad) {
                     out.print("{\"status\": \"ERROR\", \"message\": \"Stock insuficiente. Solo hay " + existencia + " unidades disponibles.\"}");
+                } else if (existencia == cantidad) {
+                    boolean actualizado = producto.descontarStock(id_producto, cantidad);
+
+                    if (actualizado) {
+                        out.print("{\"status\": \"OK\", \"message\": \"Stock suficiente. Operación realizada correctamente.\"}");
+                    } else {
+                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                        out.print("{\"status\": \"ERROR\", \"message\": \"No se pudo actualizar el stock. Verifica si ya fue actualizado.\"}");
+                    }
+                } else {
+                    boolean actualizado = producto.descontarStock(id_producto, cantidad);
+
+                    if (actualizado) {
+                        out.print("{\"status\": \"OK\", \"message\": \"Stock suficiente. Operación realizada correctamente.\"}");
+                    } else {
+                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                        out.print("{\"status\": \"ERROR\", \"message\": \"No se pudo actualizar el stock. Verifica si ya fue actualizado.\"}");
+                    }
                 }
             } catch (NumberFormatException e) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
